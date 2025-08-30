@@ -1,0 +1,44 @@
+import com.example.myapplication.ApiService
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+
+/**
+ * Singleton object to create and manage a single instance of Retrofit.
+ * This is efficient as it prevents creating a new network client for every API call.
+ */
+object RetrofitInstance {
+
+    // IMPORTANT: Replace this with your computer's local network IP address.
+    // Do NOT use "localhost" or "127.0.0.1" because the Android emulator/device
+    // runs in its own network environment and cannot see your computer's localhost.
+    // To find your IP:
+    // - Windows: Open Command Prompt and type ipconfig (look for IPv4 Address)
+    // - Mac/Linux: Open Terminal and type ifconfig or ip a
+    private const val BASE_URL = "http://192.168.201.152:5000/"
+
+    // The ApiService interface is created lazily (only when it's first accessed).
+    val api: ApiService by lazy {
+
+        // HttpLoggingInterceptor is a powerful tool for debugging.
+        // It logs the entire body of network requests and responses to Logcat.
+        // This is extremely useful for seeing exactly what data you are sending and receiving.
+        val logging = HttpLoggingInterceptor()
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        // OkHttpClient is the underlying HTTP client for Retrofit.
+        // We add our logger to it.
+        val client = OkHttpClient.Builder()
+            .addInterceptor(logging)
+            .build()
+
+        // This is where the Retrofit instance is built.
+        Retrofit.Builder()
+            .baseUrl(BASE_URL) // 1. Set the base URL for all API calls.
+            .client(client)    // 2. Attach the OkHttpClient with the logger.
+            .addConverterFactory(GsonConverterFactory.create()) // 3. Tell Retrofit to use Gson to convert JSON to Kotlin data classes.
+            .build()
+            .create(ApiService::class.java) // 4. Create an implementation of our ApiService interface.
+    }
+}

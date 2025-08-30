@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Main App Theme -->
+    <style name="Theme.MyApplication" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- You can customize colors here -->
+        <item name="android:colorPrimary">@color/purple_500</item>
+        <item name="android:colorPrimaryDark">@color/purple_700</item>
+        <item name="android:colorAccent">@color/teal_200</item>
+    </style>
+
+    <!-- Splash Screen Theme -->
+    <style name="Theme.MyApplication.NoActionBar" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Remove title bar and make it fullscreen -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <!-- Background color of splash -->
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+</resources>
