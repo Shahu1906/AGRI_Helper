@@ -10,13 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
  */
 object RetrofitInstance {
 
-    // IMPORTANT: Replace this with your computer's local network IP address.
-    // Do NOT use "localhost" or "127.0.0.1" because the Android emulator/device
-    // runs in its own network environment and cannot see your computer's localhost.
-    // To find your IP:
-    // - Windows: Open Command Prompt and type ipconfig (look for IPv4 Address)
-    // - Mac/Linux: Open Terminal and type ifconfig or ip a
-    private const val BASE_URL = "http://192.168.67.152:5000/"
+    private const val BASE_URL = "https://agri-helper-server.onrender.com/"
 
     // The ApiService interface is created lazily (only when it's first accessed).
     val api: ApiService by lazy {
