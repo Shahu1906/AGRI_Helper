@@ -16,7 +16,7 @@ object RetrofitInstance {
     // To find your IP:
     // - Windows: Open Command Prompt and type ipconfig (look for IPv4 Address)
     // - Mac/Linux: Open Terminal and type ifconfig or ip a
-    private const val BASE_URL = "http://192.168.201.152:5000/"
+    private const val BASE_URL = "http://192.168.67.152:5000/"
 
     // The ApiService interface is created lazily (only when it's first accessed).
     val api: ApiService by lazy {
