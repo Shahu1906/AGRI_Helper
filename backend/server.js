@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const config = require('./config/config');
 const connectDB = require('./config/db');
 
 // Import all the route handlers
@@ -26,10 +27,11 @@ app.use('/api/users', userRoutes);
 app.use('/api/profile', profileRoutes);
 
 // Define the port for the server to run on
-const PORT = process.env.PORT || 5000;
+const PORT = config.port;
 
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is up and running on http://localhost:${PORT}`);
+  console.log(`Environment: ${config.nodeEnv}`);
 });
 

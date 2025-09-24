@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 
 // This function acts as middleware to protect routes.
 const protect = (req, res, next) => {
@@ -11,8 +12,7 @@ const protect = (req, res, next) => {
             token = req.headers.authorization.split(' ')[1];
 
             // Verify the token using your secret key
-            const JWT_SECRET = "my_super_secret_and_long_key_for_jwt";
-            const decoded = jwt.verify(token, JWT_SECRET);
+            const decoded = jwt.verify(token, config.jwt.secret);
             
             // Attach the user's ID to the request object for later use
             req.user = decoded.user;

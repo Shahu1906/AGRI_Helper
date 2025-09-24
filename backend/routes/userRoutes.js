@@ -1,6 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const config = require('../config/config');
 const User = require('../models/User');
 const logUserEvent = require('../utils/logger'); // <-- Logger import
 
@@ -67,12 +68,10 @@ router.post('/login', async (req, res) => {
           }
         };
 
-        const JWT_SECRET = "my_super_secret_and_long_key_for_jwt";
-
         const token = jwt.sign(
             payload,
-            JWT_SECRET,
-            { expiresIn: '1d' }
+            config.jwt.secret,
+            { expiresIn: config.jwt.expiresIn }
         );
 
         res.status(200).json({

@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
+const config = require('../config/config');
 
 // This defines the structure for a "User" document in the database.
 const UserSchema = new mongoose.Schema({
@@ -28,7 +29,7 @@ UserSchema.pre('save', async function(next) {
 
   try {
     // Generate a salt and hash the password
-    const salt = await bcrypt.genSalt(10);
+    const salt = await bcrypt.genSalt(config.bcrypt.saltRounds);
     this.password = await bcrypt.hash(this.password, salt);
     next();
   } catch (error) {

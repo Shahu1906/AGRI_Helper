@@ -4,10 +4,6 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-/**
- * Singleton object to create and manage a single instance of Retrofit.
- * This is efficient as it prevents creating a new network client for every API call.
- */
 object RetrofitInstance {
 
     private const val BASE_URL = "https://agri-helper-server.onrender.com/"
@@ -15,9 +11,6 @@ object RetrofitInstance {
     // The ApiService interface is created lazily (only when it's first accessed).
     val api: ApiService by lazy {
 
-        // HttpLoggingInterceptor is a powerful tool for debugging.
-        // It logs the entire body of network requests and responses to Logcat.
-        // This is extremely useful for seeing exactly what data you are sending and receiving.
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
 
